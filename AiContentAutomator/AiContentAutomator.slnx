@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/ApplicationCore/">
+    <Project Path="src/ApplicationCore/AiContent.Application/AiContent.Application.csproj" />
+    <Project Path="src/ApplicationCore/AiContent.Domain/AiContent.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/Infrastructure/AiContent.Infrastructure/AiContent.Infrastructure.csproj" />
+    <Project Path="src/Infrastructure/AiContent.Persistence/AiContent.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/src/Presentation/">
+    <Project Path="src/Presentation/AiContent.Api/AiContent.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AiContent.Application.IntegrationTests/AiContent.Application.IntegrationTests.csproj" />
+    <Project Path="tests/AiContent.ArchitectureTests/AiContent.ArchitectureTests.csproj" />
+    <Project Path="tests/AiContent.Domain.UnitTests/AiContent.Domain.UnitTests.csproj" />
+  </Folder>
+</Solution>

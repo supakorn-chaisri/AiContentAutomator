@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
+    <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ApplicationCore\AiContent.Application\AiContent.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\AiContent.Persistence\AiContent.Persistence.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\AiContent.Infrastructure\AiContent.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
