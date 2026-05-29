@@ -2,6 +2,7 @@ using FluentAssertions;
 using NetArchTest.Rules;
 using System.Reflection;
 using Xunit;
+using System.Linq;
 
 namespace AiContent.ArchitectureTests;
 
@@ -36,7 +37,7 @@ public class ArchitectureTests
 
         // Assert
         result.IsSuccessful.Should().BeTrue(
-            $"Domain layer must not depend on any other layers. Failing types: {FormatFailingTypes(result.FailingTypeNames)}");
+            $"Domain layer must not depend on any other layers. Failing types: {FormatFailingTypes(result.FailingTypes)}");
     }
 
     /// <td xml:id="test2">กฎข้อที่ 2: Application ทำธุรกิจอย่างเดียว ห้ามพึ่งพาฐานข้อมูลหรือเทคโนโลยีภายนอก</td>
@@ -60,7 +61,7 @@ public class ArchitectureTests
 
         // Assert
         result.IsSuccessful.Should().BeTrue(
-            $"Application layer must not depend on Infrastructure, Persistence, or Api layers. Failing types: {FormatFailingTypes(result.FailingTypeNames)}");
+            $"Application layer must not depend on Infrastructure, Persistence, or Api layers. Failing types: {FormatFailingTypes(result.FailingTypes)}");
     }
 
     /// <td xml:id="test3">กฎข้อที่ 3: ทุกคลาสที่เป็น MediatR Handler ในชั้น Application ต้องลงท้ายชื่อด้วยคำว่า 'Handler'</td>
@@ -80,7 +81,7 @@ public class ArchitectureTests
 
         // Assert
         result.IsSuccessful.Should().BeTrue(
-            $"All MediatR handlers must end with 'Handler'. Failing types: {FormatFailingTypes(result.FailingTypeNames)}");
+            $"All MediatR handlers must end with 'Handler'. Failing types: {FormatFailingTypes(result.FailingTypes)}");
     }
 
     /// <td xml:id="test4">กฎข้อที่ 4: ทุกคลาสที่เป็น FluentValidation ในชั้น Application ต้องลงท้ายชื่อด้วยคำว่า 'Validator'</td>
@@ -100,13 +101,13 @@ public class ArchitectureTests
 
         // Assert
         result.IsSuccessful.Should().BeTrue(
-            $"All FluentValidation classes must end with 'Validator'. Failing types: {FormatFailingTypes(result.FailingTypeNames)}");
+            $"All FluentValidation classes must end with 'Validator'. Failing types: {FormatFailingTypes(result.FailingTypes)}");
     }
 
     // ฟังก์ชันช่วยจัด Format ข้อความ Error แสดงชื่อคลาสที่ทำผิดกฎตอนเทสพัง
-    private static string FormatFailingTypes(IEnumerable<string>? failingTypeNames)
+    private static string FormatFailingTypes(IEnumerable<IType>? failingTypes)
     {
-        if (failingTypeNames is null) return "None";
-        return string.Join(", ", failingTypeNames);
+        if (failingTypes is null || !failingTypes.Any()) return "None";
+        return string.Join(", ", failingTypes.Select(t => t.FullName));
     }
 }
